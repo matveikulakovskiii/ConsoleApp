@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace ConsoleApp
     {
         public static void Main(string[] args)
         {
-            try
+            /*try
             {
                 StreamWriter text = new StreamWriter(@"..\..\..\TextFile.txt", true);
                 string lause = "Lisan failisse lause\n";
@@ -34,13 +36,103 @@ namespace ConsoleApp
             catch (Exception)
             {
                 Console.WriteLine("Viga failiga!");
+            }*/
+
+            Dictionary<string, string> riigid = new Dictionary<string, string>(4);
+            riigid.Add("Harjumaa", "Tallinn");
+            riigid.Add("Pärnumaa", "Pärnu");
+            riigid.Add("Tartumaa", "Tartu");
+            riigid.Add("Ida-Virumaa", "Narva");
+
+            foreach (KeyValuePair<string, string> keyValue in riigid)
+            {
+                Console.WriteLine(keyValue.Key + " - " + keyValue.Value);
             }
-            
-            
-
-
-            
-            
+            int p = 0;
+            while (true)
+            {
+                Console.WriteLine("1 - Uznat linn või maakond\n 2 - dobavit\n 3 - Mäng");
+                int valik0 = int.Parse(Console.ReadLine());
+                if (valik0 == 1)
+                {
+                    try
+                    {
+                        Console.WriteLine("maakond või linn: ");
+                        string valik = Console.ReadLine();
+                        if (valik.ToLower() == "maakond")
+                        {
+                            Console.WriteLine("Kirjuta maakond: ");
+                            string valik2 = Console.ReadLine();
+                            foreach (KeyValuePair<string, string> keyValue in riigid)
+                            {
+                                if (valik2 == keyValue.Key)
+                                {
+                                    string country = keyValue.Value;
+                                    Console.WriteLine(country);
+                                }
+                            }
+                        }
+                        else if (valik.ToLower() == "linn")
+                        {
+                            Console.WriteLine("Kirjuta linn: ");
+                            string valik2 = Console.ReadLine();
+                            foreach (KeyValuePair<string, string> keyValue in riigid)
+                            {
+                                if (valik2 == keyValue.Value)
+                                {
+                                    string country = keyValue.Key;
+                                    Console.WriteLine(country);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Viga!");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Viga!");
+                    }
+                }
+                else if (valik0 == 2)
+                {
+                    Console.WriteLine("Kirjuta Maakond");
+                    string val = Console.ReadLine();
+                    Console.WriteLine("Kirjuta Linn");
+                    string val1 = Console.ReadLine();
+                    riigid.Add(val, val1);
+                    foreach (KeyValuePair<string, string> keyValue in riigid)
+                    {
+                        Console.WriteLine(keyValue.Key + " - " + keyValue.Value);
+                    }
+                }
+                else if (valik0 == 3)
+                {
+                    foreach (KeyValuePair<string, string> keyValue in riigid)
+                    {
+                        int vast = 0;
+                        Console.WriteLine(keyValue.Key);
+                        string vastus = Console.ReadLine();
+                        if (vastus == keyValue.Value)
+                        {
+                            Console.WriteLine("Õige");
+                            vast++;
+                        }
+                        else if (vastus != keyValue.Value)
+                        {
+                            Console.WriteLine("Vale");
+                        }
+                        Console.WriteLine("Sul on " + vast / vast * 100 + " %");
+                        
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Hüvasti");
+                    break;
+                }
+            }
             /*ConsoleKeyInfo nupp = new ConsoleKeyInfo();
             do 
             {
