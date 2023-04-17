@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,151 @@ namespace ConsoleApp
 {
     public class Start
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            string p=0
-            while (p=1) 
+            try
             {
-                Console.WriteLine("Oosta elevanti");
+                StreamWriter text = new StreamWriter(@"..\..\..\TextFile.txt", true);
+                string lause = "Lisan failisse lause\n";
+                text.WriteLine(lause);
+                text.Close();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Viga failiga!");
+            }
+            try
+            {
+                StringReader text = new StringReader(@"..\..\..\TextFile.txt");
+                string laused = text.ReadToEnd();
+                text.Close();
+                Console.WriteLine("Failise on järgmine informatsion:\n");
+                Console.WriteLine(laused);
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Viga failiga!");
             }
             
+            
 
+
+            
+            
+            /*ConsoleKeyInfo nupp = new ConsoleKeyInfo();
+            do 
+            {
+                Console.WriteLine("Vajuta Backspace");
+                nupp=Console.ReadKey();
+            }while (nupp.Key != ConsoleKey.Backspace);*/
+            /*Dictionary<int,string> dic = new Dictionary<int, string>(5);
+            dic.Add(1, "Üks");
+            dic.Add(2, "Kaks");
+            dic[3] = "Kolm";
+            dic[4] = "Neli";
+            dic[5] = "Viis";
+            foreach (KeyValuePair<int,string> keyValue in dic)
+            {
+                Console.WriteLine(keyValue.Key + "-" + keyValue.Value);
+            }
+
+            Dictionary<int,Inimene> opilased = new Dictionary<int,Inimene>(3);
+            Inimene inimene = new Inimene();
+            inimene.Nimi = "Matvei";
+            inimene.Vanus = 16;
+            Inimene inimene2 = new Inimene();
+            inimene2.Nimi = "Anna";
+            inimene2.Vanus = 17;
+            opilased.Add(1, inimene);
+            opilased.Add(2, inimene2);
+            opilased.Add(3,new Inimene() { Nimi = "Sahsa", Vanus = 16 });
+            foreach (Inimene item in opilased.Values)
+            {
+                Console.WriteLine(item.Nimi);
+            }
+            foreach (KeyValuePair<int, Inimene> item in opilased)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value.Nimi);
+            }*/
+            /*List<Inimene> list = new List<Inimene>();
+            Inimene inimene = new Inimene();
+            inimene.Nimi = "Matvei";
+            inimene.Vanus = 16;
+            list.Add(inimene);
+            list.Add(new Inimene() { Nimi = "Anna" });
+            foreach (Inimene item in list)
+            {
+                Console.WriteLine(item.Nimi);
+            }*/
+            /*ArrayList arrayList = new ArrayList();
+            arrayList.Add("Esimene");
+            arrayList.Add("Teine");
+            arrayList.Add("Kolmas");
+            if (arrayList.Contains("Teine")) 
+            {
+                Console.WriteLine("Sõna Teine on olemas");
+                Console.WriteLine("Teine asub kohal" + arrayList.IndexOf("Teine"));
+            }
+            else 
+            {
+                Console.WriteLine("Otsitav sõna puudub");
+            }
+            Console.WriteLine("Koku järjendis on " + arrayList.Count + "elemente");
+            arrayList.Insert(3, "Neljas");
+            arrayList.Insert(4, "Viies");
+            arrayList.Sort();
+            foreach (string item in arrayList)
+            {
+                Console.Write(item + ", ");
+            }
+            arrayList.RemoveAT(0);
+            arrayList.Remove("Viies");
+            arrayList.Clear();*/
+            /*for (int g = 0; g < f; g++)
+            {
+                Console.WriteLine("\nKirjuta number: ");
+                int aft = int.Parse(Console.ReadLine());
+                for (int i = 0; i < aft; i++)
+                {
+                    Console.Write("*" + " ");
+                }
+                return aft;
+            }*/
+            /*string nimi = "Python";
+            Alamprog.Tere(nimi);
+            int a = 12;
+            int b = 13;
+            int vastus = Alamprog.Korruta(a, b);
+            Console.WriteLine(vastus);
+            Console.WriteLine(Alamprog.Korruta(6,7));
+            Console.WriteLine("Kui palju numbreid? ");
+            int vat = int.Parse(Console.ReadLine());
+            Console.WriteLine(Alamprog.Average(vat));*/
+            /*while (true) 
+            {
+                Console.WriteLine("Osta elevant ära!");
+                string valik = Console.ReadLine();
+                if (valik.ToLower() == "elevant") 
+                {
+                    break;
+                }     
+            }*/
+            /*Console.WriteLine("kirjutage üles suvalised 4 neljakohalist numbrit");
+            int nbr1 = int.Parse(Console.ReadLine());
+            int nbr2 = int.Parse(Console.ReadLine());
+            int nbr3 = int.Parse(Console.ReadLine());
+            int nbr4 = int.Parse(Console.ReadLine());
+
+            int largo = Math.Max(Math.Max(Math.Max(nbr1, nbr2), nbr3), nbr4);
+            if (largo >=1000 && largo <= 9999) 
+            {
+                Console.WriteLine("suurim 4-kohaline arv on: {0}",largo);
+            }
+            else 
+            {
+                Console.WriteLine("Neljakohalisi numbreid pole");
+            }*/
             /*Console.WriteLine("Tere tulemast!\nMis on sinu nimi?");
             string eesnimi1 = Console.ReadLine();
             Console.WriteLine("Mis on naabri nimi?");
@@ -166,6 +303,6 @@ namespace ConsoleApp
 
 
             }*/
-        }   
+        }
     }
 }
