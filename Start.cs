@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +14,7 @@ namespace ConsoleApp
             /*try
             {
                 StreamWriter text = new StreamWriter(@"..\..\..\TextFile.txt", true);
-                string lause = "Lisan failisse lause\n";
+                string lause = "Lisan failisse lause";
                 text.WriteLine(lause);
                 text.Close();
             }
@@ -38,12 +36,28 @@ namespace ConsoleApp
                 Console.WriteLine("Viga failiga!");
             }*/
 
-            Dictionary<string, string> riigid = new Dictionary<string, string>(4);
-            riigid.Add("Harjumaa", "Tallinn");
-            riigid.Add("Pärnumaa", "Pärnu");
-            riigid.Add("Tartumaa", "Tartu");
-            riigid.Add("Ida-Virumaa", "Narva");
 
+            List<string> znachenia = new List<string>();    
+            try
+            {
+                foreach (string rida in File.ReadAllLines(@"..\..\..\TextFile.txt"))
+                {
+                    znachenia.Add(rida);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Viga failiga!");
+            }
+            string key;
+            string value;
+            Dictionary<string, string> riigid = new Dictionary<string, string>(4);
+            foreach (var rida in znachenia)
+            {
+                key = rida.Split("-")[0];
+                value = rida.Split("-")[1];
+                riigid.Add(key, value);
+            }
             foreach (KeyValuePair<string, string> keyValue in riigid)
             {
                 Console.WriteLine(keyValue.Key + " - " + keyValue.Value);
@@ -51,7 +65,7 @@ namespace ConsoleApp
             int p = 0;
             while (true)
             {
-                Console.WriteLine("1 - Uznat linn või maakond\n 2 - dobavit\n 3 - Mäng");
+                Console.WriteLine("1 - Uznat linn või maakond\n2 - dobavit\n3 - Mäng");
                 int valik0 = int.Parse(Console.ReadLine());
                 if (valik0 == 1)
                 {
@@ -102,6 +116,17 @@ namespace ConsoleApp
                     Console.WriteLine("Kirjuta Linn");
                     string val1 = Console.ReadLine();
                     riigid.Add(val, val1);
+                    try
+                    {
+                        StreamWriter text = new StreamWriter(@"..\..\..\TextFile.txt", true);
+                        string lause = "\n" + val + "-" + val1;
+                        text.WriteLine(lause);
+                        text.Close();
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Viga failiga!");
+                    }
                     foreach (KeyValuePair<string, string> keyValue in riigid)
                     {
                         Console.WriteLine(keyValue.Key + " - " + keyValue.Value);
@@ -124,7 +149,8 @@ namespace ConsoleApp
                             Console.WriteLine("Vale");
                         }
                         Console.WriteLine("Sul on " + vast / vast * 100 + " %");
-                        
+                        Random rnd = new Random();
+                        int N = rnd.Next(0, 5);
                     }
                 }
                 else
@@ -133,6 +159,10 @@ namespace ConsoleApp
                     break;
                 }
             }
+
+
+
+
             /*ConsoleKeyInfo nupp = new ConsoleKeyInfo();
             do 
             {
